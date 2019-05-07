@@ -1,0 +1,220 @@
+{
+    "title": "StorageImportExport",
+    "description": "The Storage Import/Export Resource Provider API.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/storageimportexport/2016-11-01/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "Locations_List": {
+            "main": "./lib/actions/Locations_List.js",
+            "title": "Returns a list of locations to which you can ship the disks associated with an import or export job. A location is a Microsoft data center region.",
+            "description": "Returns a list of locations to which you can ship the disks associated with an import or export job. A location is a Microsoft data center region.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Locations_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Locations_Get": {
+            "main": "./lib/actions/Locations_Get.js",
+            "title": "Returns the details about a location to which you can ship the disks associated with an import or export job. A location is an Azure region.",
+            "description": "Returns the details about a location to which you can ship the disks associated with an import or export job. A location is an Azure region.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Locations_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Operations_List": {
+            "main": "./lib/actions/Operations_List.js",
+            "title": "Returns the list of operations supported by the import/export resource provider.",
+            "description": "Returns the list of operations supported by the import/export resource provider.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Operations_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Jobs_ListBySubscription": {
+            "main": "./lib/actions/Jobs_ListBySubscription.js",
+            "title": "Returns all active and completed jobs in a subscription.",
+            "description": "Returns all active and completed jobs in a subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Jobs_ListBySubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Jobs_ListByResourceGroup": {
+            "main": "./lib/actions/Jobs_ListByResourceGroup.js",
+            "title": "Returns all active and completed jobs in a resource group.",
+            "description": "Returns all active and completed jobs in a resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Jobs_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Jobs_Delete": {
+            "main": "./lib/actions/Jobs_Delete.js",
+            "title": "Deletes an existing job. Only jobs in the Creating or Completed states can be deleted.",
+            "description": "Deletes an existing job. Only jobs in the Creating or Completed states can be deleted.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Jobs_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Jobs_Get": {
+            "main": "./lib/actions/Jobs_Get.js",
+            "title": "Gets information about an existing job.",
+            "description": "Gets information about an existing job.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Jobs_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Jobs_Update": {
+            "main": "./lib/actions/Jobs_Update.js",
+            "title": "Updates specific properties of a job. You can call this operation to notify the Import/Export service that the hard drives comprising the import or export job have been shipped to the Microsoft data center. It can also be used to cancel an existing job.",
+            "description": "Updates specific properties of a job. You can call this operation to notify the Import/Export service that the hard drives comprising the import or export job have been shipped to the Microsoft data center. It can also be used to cancel an existing job.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Jobs_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Jobs_Create": {
+            "main": "./lib/actions/Jobs_Create.js",
+            "title": "Creates a new job or updates an existing job in the specified subscription.",
+            "description": "Creates a new job or updates an existing job in the specified subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Jobs_Create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "BitLockerKeys_List": {
+            "main": "./lib/actions/BitLockerKeys_List.js",
+            "title": "Returns the BitLocker Keys for all drives in the specified job.",
+            "description": "Returns the BitLocker Keys for all drives in the specified job.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/BitLockerKeys_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

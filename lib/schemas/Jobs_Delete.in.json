@@ -1,0 +1,28 @@
+{
+    "type": "object",
+    "properties": {
+        "jobName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "2016-11-01"
+            ]
+        },
+        "Accept_Language": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}
